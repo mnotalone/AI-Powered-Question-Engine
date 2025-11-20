@@ -74,3 +74,10 @@ app.post('/api/ask', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+
+app.get('/env-test', (req, res) => {
+  res.json({
+    HF_API_KEY: !!process.env.HF_API_KEY ? 'SET' : 'NOT SET',
+    HF_MODEL: process.env.HF_MODEL || 'Default: microsoft/DialoGPT-medium'
+  });
+});
