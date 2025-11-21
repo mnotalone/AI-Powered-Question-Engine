@@ -1,29 +1,29 @@
+// server.js
 const express = require('express');
-const fetch = require('node-fetch'); // or use built-in fetch in Node 18+
+const fetch = require('node-fetch'); // Node 18+ has fetch built-in; otherwise install node-fetch
 const app = express();
+
 app.use(express.json());
-app.use(express.static('public')); // serve index.html and assets
+app.use(express.static('public')); // serve index.html, CSS, JS from ./public
 
 const PORT = process.env.PORT || 3000;
-
-// Hugging Face environment variables
-const HF_API_KEY = process.env.HF_API_KEY;
-const MODEL = process.env.HF_MODEL || 'microsoft/DialoGPT-medium';
 
 app.post('/api/ask', async (req, res) => {
   try {
     const { question } = req.body;
     if (!question) return res.status(400).send('Question required');
 
-    // If HF_API_KEY is not set, return mock response
+    const HF_API_KEY = process.env.HF_API_KEY;
+    const MODEL = process.env.HF_MODEL || 'microsoft/DialoGPT-medium';
+
     if (!HF_API_KEY) {
       return res.json({
         answer: "Mock response: This is a test answer. Please set HF_API_KEY for real AI responses."
       });
     }
 
-    // Call the Hugging Face router API
-    const hfRes = await fetch(`https://router.huggingface.co/models/${MODEL}`, {
+    // Use the new Hugging Face Router API
+    const hfRes = await fetch(`https://router.huggingface.co/api/models/${MODEL}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${HF_API_KEY}`,
@@ -32,9 +32,10 @@ app.post('/api/ask', async (req, res) => {
       body: JSON.stringify({
         inputs: question,
         parameters: {
-          max_new_tokens: 100, // limits response length
-          temperature: 0.7
-        }
+          max_new_tokens: 100, // Limit response length
+          temperature: 0.7      // Add some creativity
+        },
+        options: { wait_for_model: true }
       })
     });
 
@@ -45,7 +46,7 @@ app.post('/api/ask', async (req, res) => {
 
     const json = await hfRes.json();
 
-    // Hugging Face router returns text in different formats
+    // Extract the answer
     let answer = '';
     if (Array.isArray(json) && json[0] && json[0].generated_text) {
       answer = json[0].generated_text;
@@ -55,12 +56,13 @@ app.post('/api/ask', async (req, res) => {
       answer = JSON.stringify(json);
     }
 
-    // Remove the question if repeated
+    // Remove the original question if repeated
     if (answer.startsWith(question)) {
       answer = answer.substring(question.length).trim();
     }
 
     return res.json({ answer });
+
   } catch (err) {
     console.error(err);
     return res.status(500).send('Server error: ' + err.message);
@@ -68,5 +70,5 @@ app.post('/api/ask', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });
