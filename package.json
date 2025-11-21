@@ -1,0 +1,17 @@
+{
+  "name": "ai-powered-question-engine",
+  "version": "1.0.0",
+  "description": "AI-Powered Question Engine with CLI and Web GUI",
+  "main": "app.py",
+  "scripts": {
+    "start": "python app.py",
+    "dev": "python app.py"
+  },
+  "keywords": ["ai", "question", "engine", "flask", "openai"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

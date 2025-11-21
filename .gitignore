@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 __pycache__/
 .env
 venv/
 *.pyc
+=======
+node_modules/
+public/
+>>>>>>> ba52850ed498ff5ef49dfd5900aec54063f10fd4

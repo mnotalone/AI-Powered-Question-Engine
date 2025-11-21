@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 Name: Aalo Lawrence
 Matric No: 23CG034015
 Live URL: <fill-after-deploy>
 GitHub: https://github.com/mnotalone/AI-Powered-Question-Engine
+=======
+Name: [Your Name]
+Matric number: [Your Matric Number]
+Live URL of hosted application: [Live URL]
+GitHub repository link: [GitHub Repo Link]
+>>>>>>> ba52850ed498ff5ef49dfd5900aec54063f10fd4
