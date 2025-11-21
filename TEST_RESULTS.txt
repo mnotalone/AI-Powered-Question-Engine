@@ -1,0 +1,7 @@
+Test 1: What is the capital of Nigeria?
+Processed: what is the capital of nigeria?
+Answer: (example) Abuja
+
+Test 2: Who is the president of Nigeria?
+Processed: who is the president of nigeria?
+Answer: (example) [model-dependent]

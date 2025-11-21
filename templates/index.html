@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LLM Q&A Web App - AALO LAWRENCE</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>AI-Powered Question Engine</h1>
+    <p>Ask a question and get an AI answer (not ChatGPT).</p>
+  </header>
+
+  <div class="container">
+    <label for="q">Your question</label>
+    <input id="q" type="text" placeholder="Type any question..." />
+    <br/>
+    <button id="askBtn">Ask AI</button>
+
+    <div id="status" aria-live="polite"></div>
+    <div id="answer"></div>
+  </div>
+
+  <section class="features">
+    <h2>Why Choose Our AI Question Engine?</h2>
+    <div class="feature-list">
+      <div class="feature">
+        <h3>🤖 Intelligent Responses</h3>
+        <p>Get accurate answers powered by advanced AI models.</p>
+      </div>
+      <div class="feature">
+        <h3>⚡ Fast & Reliable</h3>
+        <p>Quick responses with high availability.</p>
+      </div>
+      <div class="feature">
+        <h3>🔒 Secure</h3>
+        <p>Your questions are processed securely.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-scroll">
+    <div class="scrolling-text">
+      <span><strong>Name:</strong> AALO LAWRENCE</span>
+      <span><strong>Matric No:</strong> 23CG034015</span>
+      <span><strong>Project:</strong> AI-Powered Question Engine</span>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
